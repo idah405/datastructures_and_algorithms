@@ -1,0 +1,68 @@
+<html>
+ <head>
+   <title>Appointment </title>
+   <style>
+     h1 {
+        margin-bottom: 1em;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+     }
+    body {
+      font-family: $helvetica;
+      color: rgba(94,93,82,1);
+    }
+     table {
+        margin-bottom: 1.5em;
+        border-spacing: 0;
+        border: 1px solid;
+        margin: 0 auto;
+        width: 100%;
+     }
+
+     th {
+       background-color: rgb(159, 228, 244);
+      border: 1px solid rgb(81, 106, 112);
+      font-weight: normal;
+      text-align: center;
+      color: rgb(228, 161, 161);
+     }
+     td{
+        border-left: 1px solid  rgba(29,150,178,1);
+        border-bottom: 1px solid  rgba(29,150,178,1);
+        text-align: center;
+     }
+   </style>
+ </head>
+ <body>
+   <h1>Appointment </h1>
+   <table>
+     <thead>
+       <tr>
+            <th>Code</th>
+            <th>ClientService</th>
+            <th>client</th>
+            <th>Status</th>
+            <th>Timestamp</th>
+        </tr>
+     </thead>
+     <tbody>
+         {% for object in object_list %}
+             <tr>
+                <td>{{object.code}}</td>
+                <td>{{object.ClientService}}</td>
+                <td>{{object.client.get_full_name}}</td>
+                <td>
+                    {% if object.paid %}
+                        Paid
+                    {% else %}
+                        Pending
+                    {% endif %}
+                </td>
+                <td>{{object.created}}</td>
+            </tr>
+         {% endfor %}
+     </tbody>
+   </table>
+ </body>
+</html>

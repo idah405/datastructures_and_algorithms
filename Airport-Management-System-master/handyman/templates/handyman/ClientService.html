@@ -1,0 +1,94 @@
+{% extends 'handyman/layouts/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %} ClientService {% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">ClientServices</h1>
+                        <a href="{% url 'handyman:ClientService-pdf' %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">ClientServices</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Service</th>
+                                            <th>seats_no</th>
+                                            <th>route</th>
+                                            <th>price</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Service</th>
+                                            <th>seats_no</th>
+                                            <th>route</th>
+                                            <th>price</th>
+                                            <th>Departure</th>
+                                            <th>Arrival</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for object in object_list %}
+                                            <tr>
+                                                <td>{{object.Service}}</td>
+                                                <td>{{object.price}}</td>
+                                                <td>
+                                                    <form method="post" action=".">
+                                                        {% csrf_token %}
+                                                        {% render_field d_form.departure type="datetime-local" class+="form-control" %}
+                                                        <input type="hidden" name="ClientService_id" value="{{object.id}}">
+                                                        <button class="btn-primary btn-sm"> Departure</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="post" action=".">
+                                                        {% csrf_token %}
+                                                        {% render_field a_form.arrival type="datetime-local"  class+="form-control" %}
+                                                        <input type="hidden" name="ClientService_id" value="{{object.id}}">
+                                                        <button class="btn-primary btn-sm"> Arrival</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+{% endblock %}
+    {% block scripts %}
+        <!-- Bootstrap core JavaScript-->
+        <script src="{% static 'staff/vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'staff/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="{% static 'staff/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="{% static 'staff/js/sb-admin-2.min.js' %}"></script>
+
+        <!-- Page level plugins -->
+        <script src="{% static 'staff/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'staff/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="{% static 'staff/js/demo/datatables-demo.js' %}"></script>
+    {% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'client/layouts/base.html' %}
+{% load static %}
+{% block title %} Appointment {% endblock %}
+{% block content %}
+
+		
+		<!-- ======================= Start Appointment ===================== -->
+		<section class="dashboard gray-bg padd-0 mrg-top-50">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="row mrg-0 mrg-top-20">
+							<div class="tr-single-box">
+								<div class="tr-single-header">
+									<h3 class="dashboard-title">My Appointment</h3>
+								</div>
+								<div class="tr-single-body">
+<!--									&lt;!&ndash; row &ndash;&gt;-->
+<!--									<div class="row mrg-bot-15">-->
+<!--										<div class="col-md-4 col-sm-7">-->
+<!--											<input type="text" class="form-control height-50" value="" placeholder="Search by listing name">-->
+<!--										</div>-->
+<!--										<div class="col-md-6 col-sm-5">-->
+<!--											<input type="submit" class="btn theme-btn height-50 width-150" value="Search">-->
+<!--										</div>-->
+<!--									</div>-->
+									
+									<!-- row -->
+									<div class="row">
+										{% for Appointment in Appointment %}
+										<!-- Single Appointment -->
+										<div class="col-md-12 ">
+											<div class="dasboard-prop-listing ">
+<!--												<div class="blog_listing_image book_image">-->
+<!--												   <a href="#">-->
+<!--														<img src="{% static 'client/assets/img/hotel/hotel-1.jpg' %}" class="img-responsive" alt="">-->
+<!--													</a>-->
+<!--												</div>-->
+												<div class="prop-info">
+													<h4 class="listing_title_book">
+														service {{Appointment.ClientService.service}} 
+													</h4>
+
+<!--													<div class="user_dashboard_listed">-->
+<!--														<strong>Period:</strong>  10-12-2018 <strong>to</strong> 19-12-2018 -->
+<!--													</div>-->
+
+													<div class="user_dashboard_listed">
+														<strong>Date:</strong> {{Appointment.created}}
+													</div>
+
+													<div class="user_dashboard_listed">
+														<strong>Appointment No: </strong> {{Appointment.code}}
+													</div>
+
+<!--													<div class="user_dashboard_listed">-->
+<!--														<strong>Adults:  </strong> 4th  -->
+<!--													</div>-->
+<!--													-->
+<!--													<div class="user_dashboard_listed">-->
+<!--														<strong>Children:  </strong> 2th  -->
+<!--													</div> 													-->
+												</div>
+												<div class="info-container_Appointment">
+													{% if Appointment.paid %}
+														<a href="#" class="Appointment-detail">View Detail</a>
+													{% else %}
+														<a href="{% url 'client:payment' Appointment.slug %}" class="Appointment-success">Pay Now</a>
+														<a href="{% url 'client:cancel_Appointment' Appointment.slug %}" class="Appointment-cancel">Cancel Appointment</a>
+													{% endif %}
+												</div>
+											</div>
+											
+										</div>
+<!--										end Appointment -->
+										{% endfor %}
+										{% for Appointment in paid_Appointments %}
+										<!-- Single Appointment -->
+										<div class="col-md-12 ">
+											<div class="dasboard-prop-listing ">
+<!--												<div class="blog_listing_image book_image">-->
+<!--												   <a href="#">-->
+<!--														<img src="{% static 'client/assets/img/hotel/hotel-1.jpg' %}" class="img-responsive" alt="">-->
+<!--													</a>-->
+<!--												</div>-->
+												<div class="prop-info">
+													<h4 class="listing_title_book">
+														service {{Appointment.ClientService.service}}
+													</h4>
+
+<!--													<div class="user_dashboard_listed">-->
+<!--														<strong>Period:</strong>  10-12-2018 <strong>to</strong> 19-12-2018 -->
+<!--													</div>-->
+
+													<div class="user_dashboard_listed">
+														<strong>Date:</strong> {{Appointment.created}}
+													</div>
+
+													<div class="user_dashboard_listed">
+														<strong>Appointment No: </strong> {{Appointment.code}}
+													</div>
+
+<!--													<div class="user_dashboard_listed">-->
+<!--														<strong>Adults:  </strong> 4th  -->
+<!--													</div>-->
+<!--													-->
+<!--													<div class="user_dashboard_listed">-->
+<!--														<strong>Children:  </strong> 2th  -->
+<!--													</div> 													-->
+												</div>
+												<div class="info-container_Appointment">
+													{% if Appointment.paid %}
+														<a href="#" class="Appointment-detail">View Detail</a>
+													{% else %}
+														<a href="{% url 'client:payment' Appointment.slug %}" class="Appointment-success">Pay Now</a>
+														<a href="{% url 'client:cancel_Appointment' Appointment.slug %}" class="Appointment-cancel">Cancel Appointment</a>
+													{% endif %}
+												</div>
+											</div>
+
+										</div>
+<!--										end Appointment -->
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		<!-- ======================= End  Appointment===================== -->
+{% endblock %}

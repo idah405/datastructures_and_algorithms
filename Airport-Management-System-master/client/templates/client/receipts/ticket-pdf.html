@@ -1,0 +1,12 @@
+<html>
+ <head>
+   <title>Ticket {{object.code}}</title>
+ </head>
+ <body>
+    <h4>{{object.client.get_full_name}}</h4>
+    <p>From {{object.ClientService.service}}</p>
+    <p><strong>Ticket No: </strong>{{object.code}}</p>
+    <p><strong>Cost: </strong>{{object.ClientService.price}}</p>
+    <p><strong>ClientService Date: </strong>{{object.ClientService.departure}}</p>
+ </body>
+</html>

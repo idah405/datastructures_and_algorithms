@@ -1,0 +1,34 @@
+{% extends 'client/layouts/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %} Payment{% endblock %}
+{% block content %}
+		<!-- ======================= Start Page Title ===================== -->
+		<div class="page-title image-title" style="background-image:url({% static 'client/assets/img/banner.jpg' %});">
+			<div class="container">
+				<div class="page-title-wrap">
+				<h2>Confirmation Page</h2>
+				<p><span>Confirmation Page</span></p>
+				</div>
+			</div>
+		</div>
+		<!-- ======================= End Page Title ===================== -->
+	
+		<section>
+			<div class="container">
+				<div class="success-wrap text-center">
+					<div class="success-text">
+						<i class="ti-check cl-success font-80"></i>
+						<h3>Payment Successful!</h3>
+						
+						<ul>
+							<li>Order Number:<span class="fl-right font-midium">{{Appointment_obj.code}}</span></li>
+							<li>Total:<span class="fl-right font-25 font-midium">{{Appointment_obj.flight.price}}</span></li>
+						</ul>
+						<a href="{% url 'client:index' %}" class="btn theme-btn">Go To Home Page</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	
+		{% endblock %}

@@ -1,0 +1,60 @@
+{% load static %}
+<!-- ======================= Start Navigation ===================== -->
+		<nav class="navbar navbar-default navbar-mobile navbar-fixed light bootsnav">
+			<div class="container">
+
+				<!-- Start Logo Header Navigation -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+						<i class="fa fa-bars"></i>
+					</button>
+					<a class="navbar-brand" href="{% url 'client:index' %}">
+						<img src="{% static 'client/assets/img/logo.png' %}" class="logo logo-display" alt="">
+						<img src="{% static 'client/assets/img/logo.png' %}" class="logo logo-scrolled" alt="">
+					</a>
+
+				</div>
+				<!-- End Logo Header Navigation -->
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="navbar-menu">
+
+					<ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
+
+						<li class="dropdown">
+							<a href="{% url 'client:index' %}">Home</a>
+						</li>
+						{% if request.user.is_authenticated and request.user.is_client %}
+							<li>
+								<a href="{% url 'client:Appointment' %}">appointment</a>
+							</li>
+							<li>
+								<a href="{% url 'client:profile' %}">profile</a>
+							</li>
+							<li>
+								<a href="{% url 'client:change_password' %}">change password</a>
+							</li>
+						{% endif %}
+
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						{% if request.user.is_authenticated and request.user.is_client %}
+							<li class="br-right"><a href="{% url 'client:log_out' %}"><i class="login-icon ti-lock"></i>Logout</a></li>
+						{% else %}
+							<li class="br-right"><a href="javascript:void(0)"  data-toggle="modal" data-target="#signin"><i class="login-icon ti-user"></i>Login</a></li>
+						{% endif %}
+						{% if request.user.is_authenticated and request.user.is_client %}
+							<li class="sign-up"><a class="btn-signup red-btn" href="{% url 'client:Appointment' %}"><span class="ti-briefcase"></span>appointment</a></li>
+						{% endif %}
+						<li class="br-right"><a href="{% url 'financemanager:index' %}"><i class="login-icon ti-user"></i>financemanager</a></li>
+						<li class="br-right"><a href="{% url 'handyman:index' %}"><i class="login-icon ti-user"></i>handyman</a></li>
+						<li class="br-right"><a href="{% url 'manager:index' %}"><i class="login-icon ti-user"></i>manager</a></li>
+						
+					</ul>
+
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+		</nav>
+		<!-- ======================= End Navigation ===================== -->

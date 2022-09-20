@@ -1,0 +1,49 @@
+{% extends 'client/layouts/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %} Feedback {% endblock %}
+{% block content %}
+
+		<!-- ======================= Start Checkout ===================== -->
+		<section class="dashboard gray-bg padd-0 mrg-top-50">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="row mrg-0 mrg-top-20">
+							<div class="tr-single-box">
+								<div class="tr-single-header">
+									<h3 class="dashboard-title">Feedback</h3>
+								</div>
+								<div class="tr-single-body">
+									<div class="row">
+										<form method="post" action=".">
+											{% csrf_token %}
+											<!-- col-md-4 -->
+											<div class="col-md-12">
+												<p>
+													<label>subject</label>
+													{% render_field form.subject class+="form-control" %}
+													<div class="text-danger">{{form.errors.subject}}</div>
+												</p>
+
+												<p>
+													<label>message</label>
+													{% render_field form.message class+="form-control height-150" %}
+													<div class="text-danger">{{form.errors.message}}</div>
+												</p>
+											</div>
+											<!-- /col-md-4 -->
+											<div class="col-md-12"><button class="btn btn-primary">Send</button> </div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		<!-- ======================= End Checkout ===================== -->
+		{% endblock %}

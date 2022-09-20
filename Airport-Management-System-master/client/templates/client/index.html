@@ -1,0 +1,170 @@
+{% extends 'client/layouts/base.html' %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<!-- ======================= Start Banner ===================== -->
+		<div class="main-banner" style="background-image:url{%static 'client/assets/img/banner-1.jpg' %};">
+			<div class="container">
+				<div class="col-md-12">
+
+					<div class="caption text-center cl-white">
+						<h2>Discover Your Next Adventure</h2>
+						<p>Explore top-rated ClientServices around kenya</p>
+					</div>
+
+					<form method="POST" action="{% url 'client:ClientService' %}">
+						{% csrf_token %}
+						<fieldset class="home-form-1">
+							<div class="col-md-5 col-sm-5 padd-0">
+								<div class="sl-box">
+									<select class="wide form-control br-1" name="service">
+										<option data-display="service">service</option>
+										{% for object in place %}
+											<option value="{{object.id}}">{{object.name}}</option>
+										{% endfor %}
+										<option value="service" disabled>service</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-2 padd-0">
+								<button type="submit" class="btn theme-btn cl-white seub-btn">FIND ClientService</button>
+							</div>
+
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- ======================= End Banner ===================== -->
+		<div class="clearfix"></div>
+
+		<!-- ====================== How It Work ================= -->
+		<section class="how-it-works">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="heading">
+							<span class="theme-cl">Working Process</span>
+							<h1>How It Works?</h1>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-4 col-sm-4">
+						<div class="work-process">
+							<div class="process-img">
+								<img src="{% static 'client/assets/img/page2-img1.jpg' %}" class="img-responsive" alt="" />
+								<span class="process-num">01</span>
+							</div>
+							<h4>Choose a location & Guide</h4>
+							<p>Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-4">
+						<div class="work-process">
+							<div class="process-img">
+								<img src="{% static 'client/assets/img/slider-img3.jpg' %}" class="img-responsive" alt="" />
+								<span class="process-num">02</span>
+							</div>
+							<h4>Choose your guide & Customize</h4>
+							<p>Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-4">
+						<div class="work-process">
+							<div class="process-img">
+								<img src="{% static 'client/assets/img/page2-img3.jpg' %}" class="img-responsive" alt="" />
+								<span class="process-num">03</span>
+							</div>
+							<h4>Book Your Guide Online</h4>
+							<p>Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- ====================== How It Work ================= -->
+		<div class="clearfix"></div>
+
+
+		<!-- ====================== Popular Tour ================= -->
+		<section class="gray-dot gray-bg">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="heading">
+							<span class="theme-cl">Select ClientService</span>
+							<h1>Popular ClientService</h1>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="list-slider">
+						{% for object in ClientService %}
+						<!-- Single Tour -->
+						<div class="list-slide-box">
+							<article class="tour-box style-1">
+
+								<!-- Single Tour -->
+								<div class="tour-box-image">
+									<figure>
+										<a href="tour-detail.html">
+											<img src="{% static 'client/assets/img/page2-img1.jpg' %}" class="img-responsive listing-box-img" alt="" />
+											<div class="list-overlay"></div>
+										</a>
+										<h4 class="tour-place">
+											<a href="#"> to {{object.route.location}}</a>
+										</h4>
+									</figure>
+								</div>
+
+								<div class="entry-meta">
+									<div class="meta-item meta-author">
+										<div class="coauthors">
+											<span class="vcard author">
+												<span class="fn">
+													<a href="#"><img alt="" src="{{object.Service.pilot.image.url}}" class="avatar avatar-24" height="24" width="24">{{object.Service.pilot.user.get_full_name}}</a>
+												</span>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="inner-box">
+									<div class="box-inner-ellipsis">
+										<h4 class="entry-title">
+											<form method="post" action="{% url 'client:Appointment_api' %}">
+												{% csrf_token %}
+												<input type="hidden" name="flight_id" value="{{object.id}}">
+												<button class="btn btn-primary" type="submit">Book ClientService</button>
+											</form>
+										</h4>
+										<div class="price-box">
+											<div class="tour-price fl-right">
+												<i class="ti ti-wallet"></i><span class="theme-cl f-bold">{{object.price}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</article>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- ====================== Popular flights ================= -->
+		<div class="clearfix"></div>
+{% endblock %}

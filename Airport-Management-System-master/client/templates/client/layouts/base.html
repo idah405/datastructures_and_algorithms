@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% load static %}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Plugins CSS -->
+	<link rel="stylesheet" href="{% static 'client/assets/plugins/css/plugins.css' %}">
+
+    <!-- Custom style -->
+    <link href="{% static 'client/assets/css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'client/assets/css/responsiveness.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'client/assets/css/skins/default.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+
+	</head>
+
+	<body>
+		{% include 'client/include/navbar.html' %}
+		{% block content %}{% endblock %}
+		{% include 'client/include/before-footer.html' %}
+		{% include 'client/include/footer.html' %}
+		{% include 'client/include/accounts.html' %}
+<!--		include 'client/include/switcher.html' -->
+		<!-- =================== START JAVASCRIPT ================== -->
+		<script src="{% static 'client/assets/plugins/js/jquery.min.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/viewportchecker.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/bootsnav.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/slick.min.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/jquery.fancybox.min.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/jquery.downCount.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/freshslider.1.0.0.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/moment.min.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/daterangepicker.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/wysihtml5-0.3.0.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/bootstrap-wysihtml5.js' %}"></script>
+
+		<!-- Dashboard Js -->
+		<script src="{% static 'client/assets/plugins/js/jquery.slimscroll.min.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/jquery.metisMenu.js' %}"></script>
+		<script src="{% static 'client/assets/plugins/js/jquery.easing.min.js' %}"></script>
+
+		<!-- Custom Js -->
+		<script src="{% static 'client/assets/js/custom.js' %}"></script>
+
+		<script>
+			$(function() {
+
+			  $('input[name="book-date"]').daterangepicker({
+				  autoUpdateInput: false,
+				  locale: {
+					  cancelLabel: 'Clear'
+				  }
+			  });
+
+			  $('input[name="book-date"]').on('apply.daterangepicker', function(ev, picker) {
+				  $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+			  });
+
+			  $('input[name="book-date"]').on('cancel.daterangepicker', function(ev, picker) {
+				  $(this).val('');
+			  });
+
+			});
+		</script>
+
+		<script src="{% static 'client/assets/js/jQuery.style.switcher.js' %}"></script>
+		<script>
+			function openRightMenu() {
+				document.getElementById("rightMenu").style.display = "block";
+			}
+			function closeRightMenu() {
+				document.getElementById("rightMenu").style.display = "none";
+			}
+		</script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#styleOptions').styleSwitcher();
+			});
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="{% static 'client/account/register.js' %}"></script>
+		<script src="{% static 'client/account/login.js' %}"></script>
+		{% for message in messages %}
+		<script>
+			let message = "{{message}}"
+			let message_tag = "{{message.tags}}"
+			console.log(message)
+			if (message_tag === "success" ){
+			  iziToast.success({
+				title: "Success",
+				message: message,
+				position: 'topRight'
+			  });
+			 }
+			if (message_tag === "info" ){
+			  iziToast.info({
+				title: "Info",
+				message: message,
+				position: 'topRight'
+			  });
+			 }
+		</script>
+		{% endfor %}
+
+    </body>
+
+</html>

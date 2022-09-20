@@ -1,0 +1,114 @@
+{% load static %}
+    <!-- Sign Up Window Code -->
+    <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="myModalLabel1">
+                <div class="modal-body">
+                    <div class="text-center"><img src="{% static 'client/assets/img/logo copy.png' %}" class="img-responsive" alt=""></div>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs nav-advance theme-bg" role="tablist">
+                        <li class="nav-item active">
+                            <a class="nav-link" data-toggle="tab" href="#login" role="tab">
+                            <i class="ti-user"></i> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#register" role="tab">
+                            <i class="ti-user"></i> Register</a>
+                        </li>
+                    </ul>
+                    <!-- Nav tabs -->
+
+                    <!-- Tab panels -->
+                    <div class="tab-content">
+
+                        <!-- Employer Panel 1-->
+                        <div class="tab-pane fade in show active" id="login" role="tabpanel">
+                            <p class="text-danger" id="form-errors"></p>
+                            <form method="post" action="{% url 'client:login' %}" id="client-login">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>User Name</label>
+                                    <input type="text" class="form-control" name="username" placeholder="User Name" required>
+                                    <div class="text-danger" id="error-username"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" id="id_password" placeholder="*********" required>
+                                    <div class="text-danger" id="error-password"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="custom-checkbox">
+                                        <input type="checkbox" id="4">
+                                        <label for="4"></label>Remember me
+                                    </span>
+                                    <a href="{% url 'password_reset' %}" title="Forget" class="fl-right">Forgot Password?</a>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn theme-btn full-width btn-m" id="client-login-btn">Login </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <!--/.Panel 1-->
+
+                        <!-- Candidate Panel 2-->
+                        <div class="tab-pane fade" id="register" role="tabpanel">
+                            <form method="post" action="{% url 'client:sign_up' %}" id="client-register">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" name="first_name" id="id_first_name" placeholder="First Name" required>
+                                    <div class="text-danger" id="error_first_name"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" id="id_last_name" placeholder="Last Name" required>
+                                    <div class="text-danger" id="error_last_name"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>User Name</label>
+                                    <input type="text" class="form-control" name="username" id="id_username" placeholder="User Name" required>
+                                    <div class="text-danger" id="error_username"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" class="form-control" name="email" id="id_email" placeholder="Email Address" required>
+                                    <div class="text-danger" id="error_email"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password1" id="id_password1" placeholder="*********" required>
+                                    <div class="text-danger" id="error_password1"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" name="password2" id="id_password2" placeholder="*********" required>
+                                    <div class="text-danger" id="error_password2"></div>
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn theme-btn full-width btn-m" id="client-register-btn">Register </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <!--/.Panel 2-->
+
+                    </div>
+                    <!-- Tab panels -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Sign Up Window -->

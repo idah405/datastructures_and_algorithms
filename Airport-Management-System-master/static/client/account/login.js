@@ -1,0 +1,57 @@
+console.log("Login client")
+$(document).ready(function() {
+        $("#client-login").submit(function(event) {
+           event.preventDefault();
+           $("#client-login-btn").html(`<i class="fa fa-hourglass-1 (alias) fa-spin"></i>`);
+           $.ajax({ data: $(this).serialize(),
+                    type: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    beforeSend: function() {
+                        $("#form-errors").html('');
+                        $("#error-username").html('');
+                        $("#error-password").html('');
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        $("#client-login-btn").html('Login');
+                        if(response['info']) {
+                         iziToast.info({
+                            title: 'Login Failed:',
+                            message: response['info'],
+                            position: 'topRight'
+                          });
+                        }
+                        if(response['message']) {
+                         iziToast.success({
+                            title: 'Logged in:',
+                            message: response['message'],
+                            position: 'topRight'
+                          });
+                          setTimeout(function () {
+                         location.reload()
+                        }, 5200);
+                        }
+                        if(response['form']['__all__']) {
+                          $("#form-errors").html(response['form']['__all__']);
+                        }
+                        if(response['form']['username']) {
+                           $("#error-username").html(response['form']['username']);
+                        }
+                        if(response['form']['password']) {
+                           $("#error-password").html(response['form']['password']);
+                        }
+
+                    },
+                    error: function (request, status, error) {
+                        $("#client-login-btn").html('Login');
+                         console.log(request.responseText);
+                         iziToast.error({
+                            title: status,
+                            message: error,
+                            position: 'topRight'
+                          });
+
+                    }
+           });
+       });
+    })
